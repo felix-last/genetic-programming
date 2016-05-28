@@ -40,6 +40,7 @@ public class GpRun implements Serializable {
 	protected void initialize() {
 
 		// adds all the functions to the function set
+		// TODO: add operators
 		functionSet = new ArrayList<ProgramElement>();
 		functionSet.add(new Addition());
 		functionSet.add(new Subtraction());
@@ -47,6 +48,7 @@ public class GpRun implements Serializable {
 		functionSet.add(new ProtectedDivision());
 
 		// adds all the constants to the terminal set
+		// TODO: Other constants?
 		terminalSet = new ArrayList<ProgramElement>();
 		double[] constants = { -1.0, -0.75, -0.5, -0.25, 0.0, 0.25, 0.5, 0.75, 1.0 };
 		for (int i = 0; i < constants.length; i++) {
@@ -66,7 +68,7 @@ public class GpRun implements Serializable {
 		for (ProgramElement programElement : terminalSet) {
 			fullSet.add(programElement);
 		}
-
+// TODO: population size, depth limit, max. depth, P(c)
 		populationSize = 100;
 		applyDepthLimit = true;
 		maximumDepth = 17;
@@ -88,6 +90,7 @@ public class GpRun implements Serializable {
 	}
 
 	protected void rampedHalfAndHalfInitialization() {
+		// TODO: Max intial depth, change initialization?
 		int maximumInitialDepth = 6;
 		/*
 		 * depth at the root node is 0. this implies that the number of
@@ -189,6 +192,7 @@ public class GpRun implements Serializable {
 				 */
 				if (applyDepthLimit && newIndividual.getDepth() > maximumDepth) {
 					newIndividual = p1;
+					// TODO: avoid bloat
 				} else {
 					newIndividual.evaluate(data);
 				}
@@ -215,6 +219,8 @@ public class GpRun implements Serializable {
 	protected Individual selectParent() {
 		Population tournamentPopulation = new Population();
 		int tournamentSize = (int) (0.05 * population.getSize());
+		// TODO: Tournament size
+		// TODO: other selection method?
 		for (int i = 0; i < tournamentSize; i++) {
 			int index = randomGenerator.nextInt(population.getSize());
 			tournamentPopulation.addIndividual(population.getIndividual(index));
@@ -246,6 +252,7 @@ public class GpRun implements Serializable {
 		int parentElementsToEnd = p.countElementsToEnd(mutationPoint);
 		Individual offspring = p.selectiveDeepCopy(mutationPoint, mutationPoint + parentElementsToEnd - 1);
 		int maximumDepth = 6;
+		// TODO: max. depth
 		Individual randomTree = grow(maximumDepth);
 
 		// add the random tree to the offspring
@@ -261,6 +268,7 @@ public class GpRun implements Serializable {
 	protected Population selectSurvivors(Population newIndividuals) {
 		Population survivors = new Population();
 		Individual bestParent = population.getBest();
+		// TODO: different elitism parameters?
 		Individual bestNewIndividual = newIndividuals.getBest();
 		Individual bestOverall;
 		// the best overall is in the current population

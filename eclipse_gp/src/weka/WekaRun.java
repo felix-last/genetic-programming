@@ -1,3 +1,12 @@
+// TODO: Weka pre-processing to GP/GSGP
+// TODO: Cross validation
+// TODO: Pre-processing
+// TODO: Remove a5 or a12?
+// TODO: which weka utils to use
+// TODO: standardize data
+// TODO: remove outliers
+// TODO: check joint significance of varibales
+// TODO: dimensional reduction: stepwise regression f. variable selection
 package weka;
 
 import java.io.BufferedReader;

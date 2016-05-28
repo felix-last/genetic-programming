@@ -18,3 +18,5 @@ public abstract class Operator extends ProgramElement {
 	
 	public abstract double performOperation(double... arguments);
 }
+
+// TODO: Square-operator / Google good operators

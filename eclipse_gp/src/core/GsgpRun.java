@@ -21,6 +21,7 @@ public class GsgpRun extends GpRun {
 
 	protected void initialize() {
 		super.initialize();
+		// TODO: Depth limit, mutation step, bounded mutation, build individuals
 		applyDepthLimit = false;
 		mutationStep = 1.0;
 		boundedMutation = false;
@@ -50,6 +51,7 @@ public class GsgpRun extends GpRun {
 		}
 
 		// create a random tree
+		// TODO: max initial depth
 		int maximumInitialDepth = 6;
 		Individual randomTree = grow(maximumInitialDepth);
 
@@ -58,7 +60,7 @@ public class GsgpRun extends GpRun {
 		for (int i = 0; i < randomTree.getSize(); i++) {
 			offspring.addProgramElement(randomTree.getProgramElementAtIndex(i));
 		}
-
+// TODO: What's happening here? Maybe change
 		offspring.addProgramElement(new Multiplication());
 		offspring.addProgramElement(new Subtraction());
 		offspring.addProgramElement(new Constant(1.0));
@@ -83,6 +85,7 @@ public class GsgpRun extends GpRun {
 		Individual offspring = new Individual();
 
 		// create a random tree and evaluate it
+		// TODO: max. initial depth
 		int maximumInitialDepth = 6;
 		Individual randomTree = grow(maximumInitialDepth);
 		randomTree.evaluate(data);
@@ -124,12 +127,14 @@ public class GsgpRun extends GpRun {
 
 	protected int calculateCrossoverOffspringSize(Individual p1, Individual p2, Individual randomTree) {
 		return p1.getSize() + p2.getSize() + randomTree.getSize() * 2 + 5;
+		// TODO: What's happening here? Maybe change
 	}
 
 	protected int calculateCrossoverOffspringDepth(Individual p1, Individual p2, Individual randomTree) {
 		int largestParentDepth = Math.max(p1.getDepth(), p2.getDepth());
 		// "+ 1" because of the bounding function
 		return Math.max(largestParentDepth + 2, randomTree.getDepth() + 3 + 1);
+		// TODO: What's happening here? Maybe change
 	}
 
 	protected Individual applyStandardMutation(Individual p) {
@@ -152,10 +157,12 @@ public class GsgpRun extends GpRun {
 
 		offspring.addProgramElement(new Multiplication());
 		offspring.addProgramElement(new Constant(mutationStep));
+		// TODO: Max. mutation step
 		offspring.addProgramElement(new Subtraction());
 
 		// create 2 random trees
 		int maximumInitialDepth = 6;
+		// TODO: max. initial depth
 		Individual randomTree1 = grow(maximumInitialDepth);
 		Individual randomTree2 = grow(maximumInitialDepth);
 
@@ -185,6 +192,7 @@ public class GsgpRun extends GpRun {
 
 		// create 2 random trees and evaluate them
 		int maximumInitialDepth = 6;
+		// TODO: max. initial depth
 		Individual randomTree1 = grow(maximumInitialDepth);
 		Individual randomTree2 = grow(maximumInitialDepth);
 		randomTree1.evaluate(data);
