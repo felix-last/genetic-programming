@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 import utils.Utils;
+import weka.WekaRun;
 
 public class Main {
 
@@ -18,13 +19,21 @@ public class Main {
 	public static final String DATA_FILENAME = "dataset";
 
 	// public static final String DATA_FILENAME = "ppb";
-	public static final int NUMBER_OF_RUNS = 3;
-	public static final int NUMBER_OF_GENERATIONS = 10;
+	public static final int NUMBER_OF_RUNS = 1;
+	public static final int NUMBER_OF_GENERATIONS = 1;
 
 	public static void main(String[] args) {
 
 		// load training and unseen data
-		Data data = loadData(DATA_FILENAME);
+		Data dataRaw = loadData(DATA_FILENAME);
+		WekaRun.loadData(DATA_FILENAME);
+		
+		WekaRun.preprocessData();
+		
+		Data data = new Data(WekaRun.trainingData, WekaRun.unseenData);
+		
+		System.out.println("reduced dim from " + dataRaw.getDimensionality() + " to " + data.getDimensionality());
+		
 
 		// run GP for a given number of runs
 		double[][] resultsPerRun = new double[4][NUMBER_OF_RUNS];

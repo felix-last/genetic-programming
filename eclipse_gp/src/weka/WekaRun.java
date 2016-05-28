@@ -14,9 +14,12 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.BitSet;
 import java.util.List;
 
 import utils.Utils;
+import weka.attributeSelection.CfsSubsetEval;
+import weka.attributeSelection.GreedyStepwise;
 import weka.classifiers.Classifier;
 import weka.classifiers.Evaluation;
 import weka.classifiers.evaluation.Prediction;
@@ -26,6 +29,8 @@ import weka.classifiers.functions.SMOreg;
 import weka.classifiers.trees.J48;
 import weka.classifiers.trees.RandomForest;
 import weka.core.Instances;
+import weka.filters.Filter;
+import weka.filters.supervised.attribute.AttributeSelection;
 
 public class WekaRun {
 
@@ -197,4 +202,25 @@ public class WekaRun {
 		}
 		return inputReader;
 	}
+
+	public static void preprocessData() {
+		selectAttributes();
+	}
+
+	private static void selectAttributes() {
+		AttributeSelection filter = new AttributeSelection();  // package weka.filters.supervised.attribute!
+		 CfsSubsetEval eval = new CfsSubsetEval();
+		 GreedyStepwise search = new GreedyStepwise();
+		 search.setSearchBackwards(true);
+		 filter.setEvaluator(eval);
+		 filter.setSearch(search);
+		 try {
+			filter.setInputFormat(trainingData);
+			trainingData = Filter.useFilter(trainingData, filter);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
 }

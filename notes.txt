@@ -1,0 +1,12 @@
+preorder traversal
+-> [+;-;2;5;50] 
+		(+)
+	(-)		50
+2		5
+
+
+GP XO: Add 2nd parent to 1st parent at random point
+GP MU: random tree at random point
+
+GSGP
+bounded mutation => less overfitting, generally recommended
