@@ -1,5 +1,5 @@
 // TODO: Apply Weka here
-
+// TODO: Add operators: square, square root, exponential (e^x), SIN, COS
 package core;
 
 import java.io.BufferedReader;
@@ -19,8 +19,8 @@ public class Main {
 	public static final String DATA_FILENAME = "dataset";
 // TODO: # runs, # generations
 	// public static final String DATA_FILENAME = "ppb";
-	public static final int NUMBER_OF_RUNS = 3;
-	public static final int NUMBER_OF_GENERATIONS = 10;
+	public static final int NUMBER_OF_RUNS = 10;
+	public static final int NUMBER_OF_GENERATIONS = 100;
 
 	public static void main(String[] args) {
 
@@ -36,8 +36,8 @@ public class Main {
 		Individual[] bestFoundPerRun = new Individual[NUMBER_OF_RUNS];
 		for (int i = 0; i < NUMBER_OF_RUNS; i++) {
 			System.out.printf("\n\t\t##### Run %d #####\n", i + 1);
-			// GpRun gp = new GpRun(data);
-			GsgpRun gp = new GsgpRun(data);
+			GpRun gp = new GpRun(data);
+			//GsgpRun gp = new GsgpRun(data);
 			gp.evolve(NUMBER_OF_GENERATIONS);
 			bestFoundPerRun[i] = gp.getCurrentBest();
 			resultsPerRun[0][i] = bestFoundPerRun[i].getTrainingError();

@@ -69,10 +69,10 @@ public class GpRun implements Serializable {
 			fullSet.add(programElement);
 		}
 // TODO: population size, depth limit, max. depth, P(c)
-		populationSize = 100;
-		applyDepthLimit = false;
-		maximumDepth = 17;
-		crossoverProbability = 0.9;
+		populationSize = 300;
+		applyDepthLimit = true;
+		maximumDepth = 20;
+		crossoverProbability = 0.8;
 		printAtEachGeneration = true;
 
 		randomGenerator = new Random();
@@ -91,7 +91,7 @@ public class GpRun implements Serializable {
 
 	protected void rampedHalfAndHalfInitialization() {
 		// TODO: Max intial depth, change initialization?
-		int maximumInitialDepth = 6;
+		int maximumInitialDepth = 4;
 		/*
 		 * depth at the root node is 0. this implies that the number of
 		 * different depths is equal to the maximumInitialDepth
@@ -218,7 +218,7 @@ public class GpRun implements Serializable {
 	// tournament selection
 	protected Individual selectParent() {
 		Population tournamentPopulation = new Population();
-		int tournamentSize = (int) (0.05 * population.getSize());
+		int tournamentSize = (int) (0.10 * population.getSize());
 		// TODO: Tournament size
 		// TODO: other selection method?
 		for (int i = 0; i < tournamentSize; i++) {
