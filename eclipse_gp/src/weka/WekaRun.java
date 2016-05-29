@@ -217,6 +217,8 @@ public class WekaRun {
 		 try {
 			filter.setInputFormat(trainingData);
 			trainingData = Filter.useFilter(trainingData, filter);
+			filter.setInputFormat(unseenData);
+			unseenData = Filter.useFilter(unseenData, filter);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
