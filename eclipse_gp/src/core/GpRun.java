@@ -70,7 +70,7 @@ public class GpRun implements Serializable {
 		}
 // TODO: population size, depth limit, max. depth, P(c)
 		populationSize = 100;
-		applyDepthLimit = true;
+		applyDepthLimit = false;
 		maximumDepth = 17;
 		crossoverProbability = 0.9;
 		printAtEachGeneration = true;
