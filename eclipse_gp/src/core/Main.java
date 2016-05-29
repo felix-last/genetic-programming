@@ -26,14 +26,10 @@ public class Main {
 
 		// load training and unseen data
 		Data dataRaw = loadData(DATA_FILENAME);
+		
 		WekaRun.loadData(DATA_FILENAME);
-		
-		WekaRun.preprocessData();
-		
+		WekaRun.preprocessData(false, false);
 		Data data = new Data(WekaRun.trainingData, WekaRun.unseenData);
-		
-		System.out.println("reduced dim from " + dataRaw.getDimensionality() + " to " + data.getDimensionality());
-		
 
 		// run GP for a given number of runs
 		double[][] resultsPerRun = new double[4][NUMBER_OF_RUNS];

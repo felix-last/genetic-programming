@@ -31,6 +31,7 @@ import weka.classifiers.trees.RandomForest;
 import weka.core.Instances;
 import weka.filters.Filter;
 import weka.filters.supervised.attribute.AttributeSelection;
+import weka.filters.unsupervised.attribute.Standardize;
 
 public class WekaRun {
 
@@ -203,8 +204,25 @@ public class WekaRun {
 		return inputReader;
 	}
 
-	public static void preprocessData() {
-		selectAttributes();
+	public static void preprocessData(boolean doSelectAttributes, boolean doStandardize) {
+		if(doSelectAttributes) {
+			selectAttributes();
+		}
+		if(doStandardize) {
+			standardizeData();
+		}
+	}
+
+	private static void standardizeData() {
+		Standardize filter = new Standardize();
+		try {
+			filter.setInputFormat(trainingData);
+			trainingData = Filter.useFilter(trainingData, filter);
+			unseenData = Filter.useFilter(unseenData, filter);
+		}
+		catch(Exception e) {
+			
+		}
 	}
 
 	private static void selectAttributes() {
@@ -217,7 +235,6 @@ public class WekaRun {
 		 try {
 			filter.setInputFormat(trainingData);
 			trainingData = Filter.useFilter(trainingData, filter);
-			filter.setInputFormat(unseenData);
 			unseenData = Filter.useFilter(unseenData, filter);
 		} catch (Exception e) {
 			e.printStackTrace();
