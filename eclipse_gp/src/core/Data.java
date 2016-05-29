@@ -1,7 +1,9 @@
 package core;
 
 import java.io.Serializable;
+import java.util.Enumeration;
 import weka.core.Instances;
+import weka.core.Instance;
 
 public class Data implements Serializable {
 
@@ -20,17 +22,11 @@ public class Data implements Serializable {
 	}
 
 	private double[][] dataFromInstance(Instances instances) {
-		double[][] dataByAttributes = new double[instances.numAttributes()][];
-		for(int i = 0; i < instances.numAttributes(); i++) {
-			dataByAttributes[i] = instances.attributeToDoubleArray(i);
-		}
-		// transpose
-		double[][] data = new double[dataByAttributes[0].length][dataByAttributes.length];
-		for(int i = 0; i < dataByAttributes.length; i++) {
-			double[] attr = dataByAttributes[i];
-			for(int j = 0; j < attr.length; j++) {
-				data[j][i] = attr[j];
-			}
+		double[][] data = new double[instances.numInstances()][];
+		int i = 0;
+		for(Enumeration<Instance> e = instances.enumerateInstances(); e.hasMoreElements(); i++) {
+			Instance instance = e.nextElement();
+			data[i] = instance.toDoubleArray();
 		}
 		return data;
 	}
