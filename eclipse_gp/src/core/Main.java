@@ -37,29 +37,44 @@ public class Main {
 
 		// run GP for a given number of runs
 		double[][] resultsPerRun = new double[4][NUMBER_OF_RUNS];
+		Individual[] bestFoundPerRun = new Individual[NUMBER_OF_RUNS];
 		for (int i = 0; i < NUMBER_OF_RUNS; i++) {
 			System.out.printf("\n\t\t##### Run %d #####\n", i + 1);
 			// GpRun gp = new GpRun(data);
 			GsgpRun gp = new GsgpRun(data);
 			gp.evolve(NUMBER_OF_GENERATIONS);
-			Individual bestFound = gp.getCurrentBest();
-			resultsPerRun[0][i] = bestFound.getTrainingError();
-			resultsPerRun[1][i] = bestFound.getUnseenError();
-			resultsPerRun[2][i] = bestFound.getSize();
-			resultsPerRun[3][i] = bestFound.getDepth();
+			bestFoundPerRun[i] = gp.getCurrentBest();
+			resultsPerRun[0][i] = bestFoundPerRun[i].getTrainingError();
+			resultsPerRun[1][i] = bestFoundPerRun[i].getUnseenError();
+			resultsPerRun[2][i] = bestFoundPerRun[i].getSize();
+			resultsPerRun[3][i] = bestFoundPerRun[i].getDepth();
 			System.out.print("\nBest =>");
-			bestFound.print();
+			bestFoundPerRun[i].print();
 			System.out.println();
-			// write individual to object file
-			bestFound.writeToObjectFile();
 		}
 
 		// present average results
-		System.out.printf("\n\t\t##### Results #####\n\n");
+		System.out.printf("\n\t\t##### Results (all runs) #####\n\n");
 		System.out.printf("Average training error:\t\t%.2f\n", Utils.getAverage(resultsPerRun[0]));
 		System.out.printf("Average unseen error:\t\t%.2f\n", Utils.getAverage(resultsPerRun[1]));
 		System.out.printf("Average size:\t\t\t%.2f\n", Utils.getAverage(resultsPerRun[2]));
 		System.out.printf("Average depth:\t\t\t%.2f\n", Utils.getAverage(resultsPerRun[3]));
+		
+		
+		System.out.printf("\n\t\t##### Results (best run) #####\n\n");
+		double[] unseenErrors = resultsPerRun[1];
+		int bestIndex = 0;
+		for(int i = 1; i < unseenErrors.length; i++) {
+			if(unseenErrors[i] < unseenErrors[bestIndex]) {
+				bestIndex = i;
+			}
+		}
+		System.out.printf("Training error:\t\t%.2f\n", resultsPerRun[0][bestIndex]);
+		System.out.printf("Unseen error:\t\t%.2f\n", resultsPerRun[1][bestIndex]);
+		System.out.printf("Size:\t\t\t%.2f\n", resultsPerRun[2][bestIndex]);
+		System.out.printf("Depth:\t\t\t%.2f\n", resultsPerRun[3][bestIndex]);
+		// write best of all runs to file
+		bestFoundPerRun[bestIndex].writeToObjectFile();
 	}
 
 	public static Data loadData(String dataFilename) {
