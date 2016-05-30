@@ -89,7 +89,7 @@ public class GpRun implements Serializable {
 		// TODO: population size, depth limit, max. depth, P(c)
 		populationSize = 300;
 		applyDepthLimit = true;
-		maximumDepth = 20;
+		maximumDepth = 25;
 		crossoverProbability = 0.8;
 		printAtEachGeneration = true;
 		useIndividualsFromFile = true;
@@ -113,7 +113,7 @@ public class GpRun implements Serializable {
 
 	protected void rampedHalfAndHalfInitialization() {
 		// TODO: Max intial depth, change initialization?
-		int maximumInitialDepth = 6;
+		int maximumInitialDepth = 4;
 		/*
 		 * depth at the root node is 0. this implies that the number of
 		 * different depths is equal to the maximumInitialDepth
@@ -303,7 +303,7 @@ public class GpRun implements Serializable {
 		int mutationPoint = randomGenerator.nextInt(p.getSize());
 		int parentElementsToEnd = p.countElementsToEnd(mutationPoint);
 		Individual offspring = p.selectiveDeepCopy(mutationPoint, mutationPoint + parentElementsToEnd - 1);
-		int maximumDepth = 6;
+		int maximumDepth = 4;
 		// TODO: max. depth
 		Individual randomTree = grow(maximumDepth);
 

@@ -22,9 +22,9 @@ public class GsgpRun extends GpRun {
 	protected void initialize() {
 		super.initialize();
 		// TODO: Depth limit, mutation step, bounded mutation, build individuals
-		applyDepthLimit = false;
+		applyDepthLimit = true;
 		// TODO: QUESTION - Where is the depth limit for GSGP specified?
-		mutationStep = 2;
+		mutationStep = 1;
 		// boundedMutation = false;
 		boundedMutation = true;
 		buildIndividuals = true;
@@ -53,7 +53,7 @@ public class GsgpRun extends GpRun {
 
 		// create a random tree
 		// TODO: max initial depth
-		int maximumInitialDepth = 6;
+		int maximumInitialDepth = 4;
 		Individual randomTree = grow(maximumInitialDepth);
 
 		offspring.addProgramElement(new LogisticFunction());
@@ -87,7 +87,7 @@ public class GsgpRun extends GpRun {
 
 		// create a random tree and evaluate it
 		// TODO: max. initial depth
-		int maximumInitialDepth = 6;
+		int maximumInitialDepth = 4;
 		Individual randomTree = grow(maximumInitialDepth);
 		randomTree.evaluate(data);
 
@@ -162,7 +162,7 @@ public class GsgpRun extends GpRun {
 		offspring.addProgramElement(new Subtraction());
 
 		// create 2 random trees
-		int maximumInitialDepth = 6;
+		int maximumInitialDepth = 4;
 		// TODO: max. initial depth
 		Individual randomTree1 = grow(maximumInitialDepth);
 		Individual randomTree2 = grow(maximumInitialDepth);
@@ -192,7 +192,7 @@ public class GsgpRun extends GpRun {
 		Individual offspring = new Individual();
 
 		// create 2 random trees and evaluate them
-		int maximumInitialDepth = 6;
+		int maximumInitialDepth = 4;
 		// TODO: max. initial depth
 		Individual randomTree1 = grow(maximumInitialDepth);
 		Individual randomTree2 = grow(maximumInitialDepth);
