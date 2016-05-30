@@ -1,5 +1,6 @@
 package core;
 
+import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
@@ -18,10 +19,12 @@ import programElements.Square;
 import programElements.SquareRoot;
 import programElements.Subtraction;
 import programElements.Tangent;
+import utils.Utils;
 
 public class GpRun implements Serializable {
 
 	private static final long serialVersionUID = 7L;
+	protected static final String INITIAL_INDIVIDUALS_FOLDER = "best";
 
 	// ##### parameters #####
 	protected Data data;
@@ -31,6 +34,7 @@ public class GpRun implements Serializable {
 	protected int maximumDepth;
 	protected double crossoverProbability;
 	protected boolean printAtEachGeneration;
+	protected boolean useIndividualsFromFile;
 
 	// ##### state #####
 	protected Random randomGenerator;
@@ -80,18 +84,23 @@ public class GpRun implements Serializable {
 		for (ProgramElement programElement : terminalSet) {
 			fullSet.add(programElement);
 		}
-// TODO: population size, depth limit, max. depth, P(c)
+		
+		// TODO: population size, depth limit, max. depth, P(c)
 		populationSize = 300;
 		applyDepthLimit = true;
 		maximumDepth = 20;
 		crossoverProbability = 0.8;
 		printAtEachGeneration = true;
+		useIndividualsFromFile = true;
 
 		randomGenerator = new Random();
 		currentGeneration = 0;
 
 		// initialize and evaluate population
 		rampedHalfAndHalfInitialization();
+		if(this.useIndividualsFromFile) {
+			initializeFromFile();
+		}
 		for (int i = 0; i < populationSize; i++) {
 			population.getIndividual(i).evaluate(data);
 		}
@@ -129,6 +138,33 @@ public class GpRun implements Serializable {
 				population.addIndividual(grow(depth));
 			}
 		}
+	}
+	
+	protected void initializeFromFile() {
+		File folder = new File(INITIAL_INDIVIDUALS_FOLDER);
+		if(!folder.isDirectory()) {
+			System.out.println("Folder \"" + INITIAL_INDIVIDUALS_FOLDER + "\" does not exist.");
+			System.exit(0);
+		}
+		ArrayList<Individual> individuals = new ArrayList<>();
+		for(File file : folder.listFiles()) {
+			if(!file.isDirectory()) {
+				try {
+					individuals.add(
+						(Individual) Utils.readObjectFromFile(file.getName())
+					);
+				}
+				catch(ClassCastException e) {
+					System.out.println("Wrong input format.");
+					throw(e);
+				}
+			}
+		}
+		for(Individual individual : individuals) {
+			population.dropWorst();
+			population.addIndividual(individual);
+		}
+		
 	}
 
 	protected Individual full(int maximumTreeDepth) {

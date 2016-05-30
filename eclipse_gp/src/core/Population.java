@@ -28,6 +28,22 @@ public class Population implements Serializable {
 		}
 		return bestIndex;
 	}
+	
+	public void dropWorst() {
+		this.removeIndividual(getWorstIndex());
+	}
+	
+	public int getWorstIndex() {
+		int worstIndex = 0;
+		double worstTrainingError = individuals.get(worstIndex).getTrainingError();
+		for (int i = 1; i < individuals.size(); i++) {
+			if (individuals.get(i).getTrainingError() > worstTrainingError) {
+				worstTrainingError = individuals.get(i).getTrainingError();
+				worstIndex = i;
+			}
+		}
+		return worstIndex;
+	}
 
 	public void addIndividual(Individual individual) {
 		individuals.add(individual);
