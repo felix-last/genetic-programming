@@ -46,7 +46,7 @@ public class GpRun implements Serializable {
 	protected void initialize() {
 
 		// adds all the functions to the function set
-		// TODO: add operators
+
 		functionSet = new ArrayList<ProgramElement>();
 		functionSet.add(new Addition());
 		functionSet.add(new Subtraction());
