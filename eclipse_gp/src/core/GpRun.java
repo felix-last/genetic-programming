@@ -11,6 +11,7 @@ import programElements.Cosine;
 import programElements.Exponential;
 import programElements.InputVariable;
 import programElements.Multiplication;
+import programElements.NaturalLogarithm;
 import programElements.Operator;
 import programElements.ProgramElement;
 import programElements.ProtectedDivision;
@@ -61,6 +62,7 @@ public class GpRun implements Serializable {
 		functionSet.add(new Square());
 		functionSet.add(new SquareRoot());
 		functionSet.add(new Exponential());
+		functionSet.add(new NaturalLogarithm());
 
 		// adds all the constants to the terminal set
 		// TODO: Other constants?
