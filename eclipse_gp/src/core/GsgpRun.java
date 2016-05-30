@@ -24,9 +24,9 @@ public class GsgpRun extends GpRun {
 		// TODO: Depth limit, mutation step, bounded mutation, build individuals
 		applyDepthLimit = false;
 		// TODO: QUESTION - Where is the depth limit for GSGP specified?
-		mutationStep = 1.0;
-		boundedMutation = false;
-		// boundedMutation = true;
+		mutationStep = 2;
+		// boundedMutation = false;
+		boundedMutation = true;
 		buildIndividuals = true;
 		// buildIndividuals = false;
 	}

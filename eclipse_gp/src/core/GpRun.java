@@ -91,7 +91,7 @@ public class GpRun implements Serializable {
 
 	protected void rampedHalfAndHalfInitialization() {
 		// TODO: Max intial depth, change initialization?
-		int maximumInitialDepth = 4;
+		int maximumInitialDepth = 6;
 		/*
 		 * depth at the root node is 0. this implies that the number of
 		 * different depths is equal to the maximumInitialDepth
@@ -218,7 +218,7 @@ public class GpRun implements Serializable {
 	// tournament selection
 	protected Individual selectParent() {
 		Population tournamentPopulation = new Population();
-		int tournamentSize = (int) (0.10 * population.getSize());
+		int tournamentSize = (int) (0.025 * population.getSize());
 		// TODO: Tournament size
 		// TODO: other selection method?
 		for (int i = 0; i < tournamentSize; i++) {
