@@ -6,12 +6,18 @@ import java.util.Random;
 
 import programElements.Addition;
 import programElements.Constant;
+import programElements.Cosine;
+import programElements.Exponential;
 import programElements.InputVariable;
 import programElements.Multiplication;
 import programElements.Operator;
 import programElements.ProgramElement;
 import programElements.ProtectedDivision;
+import programElements.Sine;
+import programElements.Square;
+import programElements.SquareRoot;
 import programElements.Subtraction;
+import programElements.Tangent;
 
 public class GpRun implements Serializable {
 
@@ -46,6 +52,12 @@ public class GpRun implements Serializable {
 		functionSet.add(new Subtraction());
 		functionSet.add(new Multiplication());
 		functionSet.add(new ProtectedDivision());
+		functionSet.add(new Sine());
+		functionSet.add(new Cosine());
+		functionSet.add(new Tangent());
+		functionSet.add(new Square());
+		functionSet.add(new SquareRoot());
+		functionSet.add(new Exponential());
 
 		// adds all the constants to the terminal set
 		// TODO: Other constants?
