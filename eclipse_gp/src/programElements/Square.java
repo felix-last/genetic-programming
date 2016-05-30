@@ -9,7 +9,13 @@ public class Square extends Operator {
 	}
 
 	public double performOperation(double... arguments) {
-		return Math.pow(arguments[0], 2);
+		double res = Math.pow(arguments[0], 2);
+		if(Double.isNaN(res) || Double.isInfinite(res)) {
+			return arguments[0];
+		}
+		else {
+			return res;
+		}
 	}
 
 	public String toString() {
