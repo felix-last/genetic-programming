@@ -1,5 +1,4 @@
 // TODO: Apply Weka here
-// TODO: Add operators: square, square root, exponential (e^x), SIN, COS
 package core;
 
 import java.io.BufferedReader;
