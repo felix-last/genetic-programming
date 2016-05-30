@@ -50,7 +50,6 @@ public class GpRun implements Serializable {
 	protected void initialize() {
 
 		// adds all the functions to the function set
-
 		functionSet = new ArrayList<ProgramElement>();
 		functionSet.add(new Addition());
 		functionSet.add(new Subtraction());
@@ -161,7 +160,10 @@ public class GpRun implements Serializable {
 			}
 		}
 		for(Individual individual : individuals) {
+			// drop all worst first to avoid dropping imported individuals
 			population.dropWorst();
+		}
+		for(Individual individual : individuals) {
 			population.addIndividual(individual);
 		}
 		
