@@ -11,7 +11,7 @@ public class FinalEvaluation {
 
 		// evaluate individual on final data
 		// String evaluationData = "dataset.txt";
-		String evaluationData = "dataset_training.txt";
+		String evaluationData = "dataset_validation.txt";
 		double[][] data = Main.readData(evaluationData);
 		double[] outputs = finalIndividual.evaluate(data);
 		double finalError = Utils.calculateRMSE(data, outputs);

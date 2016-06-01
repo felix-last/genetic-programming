@@ -18,8 +18,8 @@ public class Main {
 	public static final String DATA_FILENAME = "dataset";
 // TODO: # runs, # generations
 	// public static final String DATA_FILENAME = "ppb";
-	public static final int NUMBER_OF_RUNS = 30;
-	public static final int NUMBER_OF_GENERATIONS = 50;
+	public static final int NUMBER_OF_RUNS = 1;
+	public static final int NUMBER_OF_GENERATIONS = 500;
 
 	public static void main(String[] args) {
 
@@ -78,8 +78,8 @@ public class Main {
 		if (SHUFFLE_AND_SPLIT) {
 			double[][] allData = readData(dataFilename + ".txt");
 			List<Integer> instances = Utils.shuffleInstances(allData.length);
-			int trainingInstances = (int) Math.floor(0.7 * allData.length);
-			int unseenInstances = (int) Math.ceil(0.3 * allData.length);
+			int trainingInstances = (int) Math.floor(0.9 * allData.length);
+			int unseenInstances = (int) Math.ceil(0.1 * allData.length);
 
 			trainingData = new double[trainingInstances][];
 			unseenData = new double[unseenInstances][];

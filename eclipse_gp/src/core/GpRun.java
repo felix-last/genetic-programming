@@ -67,7 +67,7 @@ public class GpRun implements Serializable {
 		// adds all the constants to the terminal set
 		// TODO: Other constants?
 		terminalSet = new ArrayList<ProgramElement>();
-		double[] constants = { -1.0, -0.75, -0.5, -0.25, 0.0, 0.25, 0.5, 0.75, 1.0 };
+		double[] constants = { -2.0, -1.75, -1.5, -1.25, -1.0, -0.75, -0.5, -0.25, 0.0, 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0 };
 		for (int i = 0; i < constants.length; i++) {
 			terminalSet.add(new Constant(constants[i]));
 		}
@@ -87,10 +87,10 @@ public class GpRun implements Serializable {
 		}
 		
 		// TODO: population size, depth limit, max. depth, P(c)
-		populationSize = 300;
+		populationSize = 50;
 		applyDepthLimit = true;
-		maximumDepth = 25;
-		crossoverProbability = 0.8;
+		maximumDepth = 20;
+		crossoverProbability = 0.00;
 		printAtEachGeneration = true;
 		useIndividualsFromFile = true;
 
@@ -270,7 +270,7 @@ public class GpRun implements Serializable {
 	// tournament selection
 	protected Individual selectParent() {
 		Population tournamentPopulation = new Population();
-		int tournamentSize = (int) (0.025 * population.getSize());
+		int tournamentSize = (int) (0.10 * population.getSize());
 		// TODO: Tournament size
 		// TODO: other selection method?
 		for (int i = 0; i < tournamentSize; i++) {
