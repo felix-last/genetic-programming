@@ -16,5 +16,6 @@ public class FinalEvaluation {
 		double[] outputs = finalIndividual.evaluate(data);
 		double finalError = Utils.calculateRMSE(data, outputs);
 		System.out.println(finalError);
+		finalIndividual.print();
 	}
 }
